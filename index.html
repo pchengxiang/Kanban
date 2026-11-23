@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>專案管理看板</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header class="topbar">
+        <div class="brand">Project Board</div>
+
+        <div class="top-actions">
+            <button class="top_button" id="add_project">
+                + 新增專案
+            </button>
+            <button class="top_button danger" id="remove-project">
+                移除專案
+            </button>
+        </div>
+    </header>
+
+    <aside class="project-list">
+        <div class="panel-heading">
+            <h3>我的專案</h3>
+        </div>
+
+        <div class="project-items">
+           
+        </div>
+    </aside>
+
+    <main class="board-area">
+
+        <div class="board-header">
+            <div>
+                <h2 id="board-title">目前沒有選擇任何專案</h2>
+                <p id="board-description">管理目前專案的工作進度</p>
+            </div>
+
+            <button class="add-board">
+                + 新增看板
+            </button>
+        </div>
+
+        <div class="board-container">
+
+            
+
+        </div>
+    </main>
+
+    <aside class="item-info-board">
+        <div class="panel-heading">
+            <h3>任務資訊</h3>
+        </div>
+
+        <div class="info-content">
+        
+          
+           
+        </div>
+    </aside>
+
+    <footer>
+        Project Board v0.1
+    </footer>
+    <script type="module" src="./js/app.js"></script>
+</body>
+</html>

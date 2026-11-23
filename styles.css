@@ -1,0 +1,671 @@
+
+/* =================================
+   1. Design Tokens
+================================= */
+
+:root {
+    --bg-main: #f4f6f9;
+    --bg-panel: #ffffff;
+    --bg-column: #eef1f5;
+
+    --text-main: #252b36;
+    --text-secondary: #77808e;
+
+    --border-color: #e1e5eb;
+
+    --primary: #4263eb;
+    --primary-hover: #3451ce;
+
+    --danger: #d94848;
+
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+
+    --sidebar-width: 220px;
+    --info-width: 280px;
+
+    --shadow-sm: 0 2px 6px rgba(0,0,0,0.04);
+}
+
+/* =================================
+   2. Reset
+================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    display: grid;
+
+    grid-template-columns:
+        var(--sidebar-width)
+        minmax(0, 1fr)
+        var(--info-width);
+
+    grid-template-rows: 64px minmax(0, 1fr) 36px;
+
+    grid-template-areas:
+        "header header header"
+        "projects main info"
+        "footer footer footer";
+
+    font-family:
+        "Noto Sans TC",
+        "Microsoft JhengHei",
+        sans-serif;
+
+    background: var(--bg-main);
+    color: var(--text-main);
+}
+
+/* =================================
+   3. Header
+================================= */
+
+header {
+    grid-area: header;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 var(--space-6);
+
+    background: var(--bg-panel);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.brand {
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+.top-actions {
+    display: flex;
+    gap: var(--space-2);
+}
+
+button {
+    font: inherit;
+    cursor: pointer;
+}
+
+.top_button {
+    padding: 9px 14px;
+
+    border: 1px solid var(--primary);
+    border-radius: var(--radius-sm);
+
+    background: var(--primary);
+    color: white;
+
+    transition: background 0.2s;
+}
+
+.top_button:hover {
+    background: var(--primary-hover);
+}
+
+.top_button.danger {
+    background: white;
+    border-color: var(--border-color);
+    color: var(--danger);
+}
+
+/* =================================
+   4. Project Sidebar
+================================= */
+
+.project-list {
+    grid-area: projects;
+
+    min-width: 0;
+    overflow-y: auto;
+
+    padding: var(--space-5) var(--space-3);
+
+    background: var(--bg-panel);
+    border-right: 1px solid var(--border-color);
+}
+
+.panel-heading {
+    padding: 0 var(--space-2);
+    margin-bottom: var(--space-4);
+}
+
+.panel-heading h3 {
+    margin: 0;
+    font-size: 15px;
+}
+
+.project-items {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.project-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    width: 100%;
+    padding: 11px 10px;
+
+    border: none;
+    border-radius: var(--radius-sm);
+
+    background: transparent;
+    color: var(--text-main);
+
+    text-align: left;
+}
+
+.project-item:hover {
+    background: var(--bg-main);
+}
+
+.project-item.active {
+    background: #edf1ff;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.project-dot {
+    width: 8px;
+    height: 8px;
+
+    flex-shrink: 0;
+    border-radius: 50%;
+
+    background: var(--primary);
+}
+
+/* =================================
+   5. Main Board
+================================= */
+
+.board-area {
+    grid-area: main;
+
+    min-width: 0;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: var(--space-6);
+    overflow: hidden;
+}
+
+.board-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: var(--space-4);
+    margin-bottom: var(--space-5);
+}
+
+.board-header h2 {
+    margin: 0 0 6px;
+    font-size: 21px;
+}
+
+.board-header p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.add-board {
+    flex-shrink: 0;
+
+    padding: 9px 13px;
+
+    border: 1px dashed #aab4c3;
+    border-radius: var(--radius-sm);
+
+    background: transparent;
+    color: var(--text-secondary);
+}
+
+/* Board horizontal scrolling */
+
+.board-container {
+    display: flex;
+    align-items: stretch;
+
+    gap: var(--space-4);
+
+    flex: 1;
+    min-height: 0;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    padding-bottom: var(--space-2);
+}
+
+/* =================================
+   6. Board Columns
+================================= */
+
+.board-column {
+    display: flex;
+    flex-direction: column;
+
+    flex: 0 0 250px;
+    min-width: 0;
+
+    padding: var(--space-3);
+
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+
+    background: var(--bg-column);
+
+    overflow-y: auto;
+}
+
+.column-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: var(--space-3);
+    padding: 2px 2px 10px;
+
+    border-bottom: 1px solid var(--border-color);
+}
+
+.column-header h3 {
+    margin: 0;
+    font-size: 14px;
+}
+
+.task-count {
+    display: grid;
+    place-items: center;
+
+    min-width: 22px;
+    height: 22px;
+
+    padding: 0 6px;
+
+    border-radius: 20px;
+    background: #dfe4ec;
+
+    color: #596273;
+    font-size: 11px;
+}
+
+/* =================================
+   7. Task Cards
+================================= */
+
+.task-card {
+    padding: var(--space-3);
+
+    margin-bottom: var(--space-3);
+
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+
+    background: white;
+    box-shadow: var(--shadow-sm);
+
+    cursor: pointer;
+}
+
+.task-card:hover {
+    border-color: #aab8f3;
+}
+
+.task-card h4 {
+    margin: 10px 0 7px;
+    font-size: 14px;
+}
+
+.task-card p {
+    margin: 0 0 14px;
+
+    color: var(--text-secondary);
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.task-tag {
+    display: inline-block;
+
+    padding: 4px 8px;
+
+    border-radius: 4px;
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.task-tag.blue {
+    background: #e6edff;
+    color: #4263eb;
+}
+
+.task-tag.purple {
+    background: #f0e8ff;
+    color: #7950b2;
+}
+
+.task-tag.green {
+    background: #e0f5e9;
+    color: #27834c;
+}
+
+.task-tag.gray {
+    background: #e9edf2;
+    color: #687385;
+}
+
+.task-footer {
+    display: flex;
+    justify-content: space-between;
+
+    padding-top: 10px;
+
+    border-top: 1px solid #edf0f4;
+
+    color: var(--text-secondary);
+    font-size: 11px;
+}
+
+/* =================================
+   8. Add Task
+================================= */
+
+.add-task {
+    width: 100%;
+    padding: 10px;
+
+    border: 1px dashed #bdc5d1;
+    border-radius: var(--radius-sm);
+
+    background: transparent;
+    color: var(--text-secondary);
+
+    text-align: left;
+}
+
+.add-task:hover,
+.add-board:hover {
+    background: rgba(255,255,255,0.7);
+    color: var(--primary);
+}
+
+/* =================================
+   9. Information Panel
+================================= */
+
+.item-info-board {
+    grid-area: info;
+
+    min-width: 0;
+    overflow-y: auto;
+
+    padding: var(--space-5) var(--space-4);
+
+    background: var(--bg-panel);
+    border-left: 1px solid var(--border-color);
+}
+
+.info-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.info-content h3 {
+    margin: 5px 0 12px;
+    font-size: 17px;
+}
+
+.info-content label {
+    margin-top: 12px;
+
+    color: var(--text-secondary);
+    font-size: 12px;
+}
+
+.info-content p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.info-value {
+    width: 100%;
+
+    padding: 10px;
+
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+
+    background: var(--bg-main);
+    font-size: 13px;
+}
+
+/* =================================
+   10. Footer
+================================= */
+
+footer {
+    grid-area: footer;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 var(--space-4);
+
+    border-top: 1px solid var(--border-color);
+
+    background: white;
+    color: var(--text-secondary);
+
+    font-size: 11px;
+}
+
+/* =================================
+   11. Responsive
+================================= */
+
+@media (max-width: 1100px) {
+    body {
+        grid-template-columns:
+            190px
+            minmax(0, 1fr);
+
+        grid-template-rows: 64px minmax(0, 1fr) 36px;
+
+        grid-template-areas:
+            "header header"
+            "projects main"
+            "footer footer";
+    }
+
+    .item-info-board {
+        display: none;
+    }
+}
+
+@media (max-width: 650px) {
+    body {
+        grid-template-columns: minmax(0, 1fr);
+
+        grid-template-rows: 64px auto minmax(0, 1fr) 36px;
+
+        grid-template-areas:
+            "header"
+            "projects"
+            "main"
+            "footer";
+    }
+
+    .project-list {
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+
+        padding: 10px 12px;
+    }
+
+    .project-items {
+        flex-direction: row;
+        overflow-x: auto;
+    }
+
+    .project-item {
+        flex: 0 0 auto;
+        width: auto;
+        white-space: nowrap;
+    }
+
+    .board-area {
+        padding: 16px 12px;
+    }
+
+    .board-column {
+        flex-basis: 230px;
+    }
+
+    .top-actions {
+        gap: 5px;
+    }
+
+    .top_button {
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    .brand {
+        font-size: 15px;
+    }
+}
+
+
+/* Task Information Actions */
+
+.info-actions {
+    display: flex;
+    width: 100%;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.info-actions button {
+    flex: 1;
+    padding: 9px;
+
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+
+    background: white;
+    color: var(--text-main);
+}
+
+.info-actions button:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.info-actions button[data-action="delete-task"] {
+    color: var(--danger);
+}
+
+.task-card:active {
+    cursor: grabbing;
+}
+
+.task-card[draggable="true"] {
+    cursor: grab;
+}
+
+.task-card:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+
+
+.task-edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    min-width: 0;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    min-width: 0;
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--surface-color);
+    color: var(--text-color);
+    font: inherit;
+    box-sizing: border-box;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 1px;
+}
+
+.form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.project-item {
+    cursor: grab;
+    user-select: none;
+}
+
+.project-item:active {
+    cursor: grabbing;
+}
